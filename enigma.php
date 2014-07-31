@@ -124,7 +124,7 @@ function enigma_encode($content, $text = ""){
         $divid .= rand(0, 10);
     }
 
-    $js = "<span id='$divid'>$text</span><script type='text/javascript'>var x = document.getElementById('$divid');x.parentNode.removeChild(x);document.write('$script');</script>";
+    $js = "<span id='$divid'>$text</span><script type='text/javascript'>jQuery('#$divid').replaceWith('$script');</script>";
     
     return $js;
 }
