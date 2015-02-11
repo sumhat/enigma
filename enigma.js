@@ -10,7 +10,7 @@
     if (!value) {
       return;
     }
-    jQuery(element).replaceWith(eval('"' + value + '"'));
+    jQuery(element).replaceWith(jQuery.parseJSON('"' + value + '"'));
   };
   
   Enigma.prototype.Clickable = function(element) {
