@@ -31,21 +31,23 @@
     var pattern = /comment_author_[^=]*=([^;]+);/g;
     var cookie = document.cookie;
     var nameCap = [];
-    var names = [];
+    var names = {};
     while ((nameCap = pattern.exec(cookie)) !== null) {
-      names.push(nameCap[1]);
+      names[nameCap[1]] = true;
+      var decodedName = decodeURIComponent(nameCap[1]);
+      if (decodedName !== nameCap[1]) {
+        names[decodedName] = true;
+      }
     }
-    if (names.length === 0) {
+    if (jQuery.isEmptyObject(names)) {
       return;
     }
     var found = false;
     jQuery('*').each(function(idx, element) {
       var text = jQuery(element).text();
-      for (var i = 0; i < names.length; ++i) {
-        if (names[i] === text || decodeURIComponent(names[i]) === text) {
-          found = true;
-          break;
-        }
+      if (names[text]) {
+        found = true;
+        return false;
       }
     });
     if (found) {
