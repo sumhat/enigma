@@ -22,11 +22,34 @@ Enigma.prototype.Clickable = function(element) {
   jQuery(element).replaceWith(link);
 };
 
+Enigma.prototype.IfReplied = function(element) {
+  var cookie = document.cookie;
+  var nameCap = /comment_author_[^=]*=([^;]+);/i.exec(cookie);
+  if (nameCap === null || !(nameCap instanceof Array)) {
+    return;
+  }
+  var found = false;
+  jQuery('*').each(function(idx, element) {
+    var text = jQuery(element).text();
+    for (var i = 1; i < nameCap.length; ++i) {
+      if (nameCap[i] === text) {
+        found = true;
+        break;
+      }
+    }
+  });
+  if (found) {
+    this.Replace(element);
+  }
+};
+
 Enigma.prototype.Run = function() {
   var thisEnigma = this;
   jQuery('span[id^="engimadiv"]').each(function(idx, element) {
     if (jQuery(element).attr('data-enigmad') === 'y') {
       return thisEnigma.Clickable(element);
+    } else if (jQuery(element).attr('data-enigmad') === 'replied') {
+      return thisEnigma.IfReplied(element);
     }
     thisEnigma.Replace(element);
   });
