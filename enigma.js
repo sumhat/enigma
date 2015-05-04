@@ -15,16 +15,30 @@
   
   Enigma.prototype.Clickable = function(element) {
     var thisEnigma = this;
+    var text = jQuery(element).text();
     var link = jQuery("<a />", {
       href : "#",
-      text : jQuery(element).text(),
+      text : text,
       'data-enigmav' : this.GetValue(element)
     });
     jQuery(element).replaceWith(link);
     jQuery(link).on('click', function() {
       thisEnigma.Replace(link);
+      thisEnigma.PostGAEvent('Enigma', text, 'Click', 1);
       return false;
     });
+  };
+  
+  Enigma.prototype.PostGAEvent = function(category, label, action, value) {
+    if (typeof Leona !== 'undefined' && Leona.analytics) {
+      var aData = Leona.analytics.getCoreData();
+      aData.t = 'event';
+      aData.ec = category;
+      aData.ea = action;
+      aData.el = label;
+      aData.ev = value;
+      Leona.analytics.post(aData);
+    }
   };
   
   Enigma.prototype.IfReplied = function(element) {
