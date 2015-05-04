@@ -58,6 +58,10 @@ decryption is done automatically.
 
 == Changelog ==
 
+= 2.3 =
+* Integration with Google Analytics. If you have GA enabled at your blog, Engima
+  now sends an event when user clicks a Engima clickable link.
+
 = 2.2 =
 * Add an experimental feature that content requires user to reply to see.
 
