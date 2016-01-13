@@ -58,6 +58,9 @@ decryption is done automatically.
 
 == Changelog ==
 
+= 2.6 =
+Allow embeded shortcode.
+
 = 2.5 =
 Multiple type of encoding.
 
