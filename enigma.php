@@ -92,7 +92,7 @@ function enigma_encode($content, $text, $ondemand) {
 }
 
 function enigma_process($attr, $content = NULL) {
-  shortcode_atts(array('text' => '', 'ondemand' => 'n'), $attr);
+  $attr = shortcode_atts(array('text' => '', 'ondemand' => 'n'), $attr);
   return enigma_encode($content, $attr['text'], $attr['ondemand']);
 }
 
