@@ -58,6 +58,9 @@ decryption is done automatically.
 
 == Changelog ==
 
+= 2.7 =
+Fixed usage of shortcode_atts.
+
 = 2.6 =
 Allow embeded shortcode.
 
